@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/*
+ * Zechariah Burrus
+ * Assignment 2
+ * Detects collisions and destroys game objects when they collide, also increments score.
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

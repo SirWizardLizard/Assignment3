@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/*
+ * Zechariah Burrus
+ * Assignment 2
+ * Causes gameObjects to move forward at a specific speed
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

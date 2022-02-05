@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/*
+ * Zechariah Burrus
+ * Assignment 2
+ * When the player uses space it shoots a projectile prefab
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

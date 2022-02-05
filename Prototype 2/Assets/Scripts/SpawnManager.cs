@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/*
+ * Zechariah Burrus
+ * Assignment 2
+ * Spawns the designated prefabs randomly with specified bounds and time constraints.
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,17 +17,19 @@ public class SpawnManager : MonoBehaviour {
     private float rightBound = 14;
     private float spawnPosZ = 20;
 
-    //Gameover value
-    public bool gameOver = false;
+    public HealthSystem healthSystem;
 
     void Start() {
+        //reference to health system script
+        healthSystem = GameObject.FindGameObjectWithTag("HealthSystem").GetComponent<HealthSystem>();
+
         StartCoroutine(SpawnRandomPrefabWithCoroutine());
     }
 
     // Update is called once per frame
     void Update() {
         if (Input.GetKeyDown(KeyCode.S)) {
-            SpawnRandomPrefab();
+           // SpawnRandomPrefab();
         }
     }
 
@@ -41,7 +49,7 @@ public class SpawnManager : MonoBehaviour {
         yield return new WaitForSeconds(3f);
 
         //While the game isn't over continue spawning prefabs every 1.5 seconds
-        while(!gameOver) {
+        while(!healthSystem.gameOver) {
             SpawnRandomPrefab();
 
             float randomDelay = Random.Range(.5f, 1.5f);
