@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/*
+ * Zechariah Burrus
+ * Assignment 2
+ * Spawns the designated prefabs randomly with specified bounds and time constraints.
+ * Also stops spawning balls when game is won or game is over.
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,13 +17,16 @@ public class SpawnManagerX : MonoBehaviour
     private float spawnLimitXRight = 7;
     private float spawnPosY = 30;
 
-    private float startDelay = 1.0f;
-    private float spawnInterval = 4.0f;
+    public HealthSystem healthSystem;
+    public DisplayScore displayScore;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SpawnRandomBall", startDelay, spawnInterval);
+        healthSystem = GameObject.FindGameObjectWithTag("HealthSystem").GetComponent<HealthSystem>();
+        displayScore = GameObject.FindGameObjectWithTag("DisplayScore").GetComponent<DisplayScore>();
+        StartCoroutine(SpawnRandomBallWithCoroutine());
     }
 
     // Spawn random ball at random x position at top of play area
@@ -24,9 +34,23 @@ public class SpawnManagerX : MonoBehaviour
     {
         // Generate random ball index and random spawn position
         Vector3 spawnPos = new Vector3(Random.Range(spawnLimitXLeft, spawnLimitXRight), spawnPosY, 0);
+        int randomBallIndex = Random.Range(0, ballPrefabs.Length);
 
         // instantiate ball at random spawn location
-        Instantiate(ballPrefabs[0], spawnPos, ballPrefabs[0].transform.rotation);
+        Instantiate(ballPrefabs[randomBallIndex], spawnPos, ballPrefabs[randomBallIndex].transform.rotation);
     }
 
+    IEnumerator SpawnRandomBallWithCoroutine()
+    {
+        yield return new WaitForSeconds(3f);
+
+        while (!healthSystem.gameOver && !displayScore.gameWon)
+        {
+            SpawnRandomBall();
+
+            float randomDelay = Random.Range(3f, 5f);
+
+            yield return new WaitForSeconds(randomDelay);
+        }
+    }
 }
