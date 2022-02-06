@@ -25,7 +25,7 @@ public class SpawnManagerX : MonoBehaviour
     void Start()
     {
         healthSystem = GameObject.FindGameObjectWithTag("HealthSystem").GetComponent<HealthSystem>();
-        displayScore = GameObject.FindGameObjectWithTag("DisplayScore").GetComponent<DisplayScore>();
+        displayScore = GameObject.FindGameObjectWithTag("DisplayScoreText").GetComponent<DisplayScore>();
         StartCoroutine(SpawnRandomBallWithCoroutine());
     }
 
